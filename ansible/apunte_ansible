@@ -1,0 +1,18 @@
+0_Cruzar las claves 
+  - ls -la .ssh/
+  - ssh-keygen
+  - ll .ssh
+  - cat .ssh/id_rsa.pub >> .ssh/authorized_keys (!!! ESTA NO ES LA FORMA CORRECTA DE CRUZAR LAS CLAVES, LA FORMA CORRECTA
+  NO ME FUNCIONA, ESTA FOR SOLO FUNCIONA PORQUE ESTOY EN UN SOLO EQUIPO!!!) <- (ESTA FORMA LA MOSTRO EL PROFE, SE PUEDE HACER) 
+
+1_Las tareas hay que agregarlas al archivo .yml que se encuentra del de /roles/task/ 
++(buscar en la documentacion de ansible(el link esta en el repo de ansible) las tareas que necesito segun lo pedido)
+
+2_Si hay que usar template, dentro de la carpeta template van los archivos.txt.j2 segun lo pedido
+
+3_Para los datos personales hay que crear las variable dentro del archivo que esta en el directorio /vars (usar las variables
+como se muestra en el ejemplo) (hay que importar las variables al main.yml)
+
+4_ ejecutar el playbook.yml
+- ansible-playbook -i inventory playbook.yml
+

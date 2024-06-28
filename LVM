@@ -1,0 +1,43 @@
+-------------------------------- CREO QUE PARA TODO ESTOS COMANDOS HAY QUE USAR SUDO (NO ME ACUERDO) --------------------------- 
+'''
+1_analizar los tamaños de los discos y los VGS pedidos
+-------------------------------------------------------------------------------------------
+2_Crear las particiones segun sea necesario
+
+- fdisk /dev/"disco a particionar"
+- Cambiar el tipo de particion a 8e
+-------------------------------------------------------------------------------------------
+3_Crear los Physical Volume (PV)
+- pvcreate /dev/"particion creada"
+  - Con el comando - pvs - listo los PV creados
+-------------------------------------------------------------------------------------------
+4_Crear los Volume Group (VG)
+- vgcreate "nombre del VG" "nombre del PV"
+  -Con el comando - vgs - listo los VG creados
+-------------------------------------------------------------------------------------------
+5_Crear los Logical Volume (LV)
+- lvcreate "tamaño" "nombre del VG" -n "nombre del LV"
+-------------------------------------------------------------------------------------------
+6_Formateo
+- mkfs.ext4 "nombre de LV"
+  6.1_Si es memoria SWAP
+  formatear con 
+    - mkswap "nombre del LV"
+  6.2_Crear la memoria SWAP
+  - swapon "nombre del LV" (Formateado como swap)
+  ---- Con esto ya queda montada la memoria swap (Punto de montaje)
+-------------------------------------------------------------------------------------------
+7_Montaje
++ Crear con mkdir el directorio si es necesario (no es necesario para las img de docker)
+- mount "nombre del LV" "nombre del punto de montaje"
+
++ Al montar docker hay que hacer un restart (despues del montaje)
+  - systemctl restart docker
+-------------------------------------------------------------------------------------------
+
+--------------------- EXTENDER EL ESPACIO PARA LAS IMAGENES DE DOCKER  --------------------
++ Si tengo espacio en el VG, hago un lvextend 
++ Si no, crear una nueva particion, un nuevo PV y extender el VG 
+  + para extender el LV 
+    - lvextend -l 100%FREE "nombre de LV"
+  - resize2fs "nombre del LV"
