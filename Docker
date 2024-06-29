@@ -1,5 +1,5 @@
 1_Agregar el usuario al grupo docker para poder usarlo
-- sudo usermod -a -G docker "nombre de usuario"
+- sudo usermod -a -G docker nombre_de_usuario
 + desloguear y loguear para que tome el cambio
 ------------------------------------------------------------------------------------------
 2_validar si el servicio de docker esta funcionando
@@ -16,12 +16,12 @@
     COPY web /usr/share/nginx/html
 ------------------------------------------------------------------------------------------
 4_Crear la imagen
-- docker build -t "usuario"/mi-web:Lasted  .
+- docker build -t usuario/mi-web:Lasted  .
 ------------------------------------------------------------------------------------------
 5_ SUBIR LA IMAGE A DOCKER HUB. (buscar el google o chat gpt como subirla) (hay que crearse una cuenta)
 ------------------------------------------------------------------------------------------
 6_Correr la imagen
-- docker -d -p 81;80 "usuario"/mi-web:Lasted"
+- docker -d -p 81:80 usuario/mi-web:Lasted"
 ------------------------------------------------------------------------------------------
 7_Probar
 curl localhost:81
